@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+</head>
+<body>
+
+    <div class="result"></div>
+
+    <form class="districtFormUp" action="../php/updateDistrict.php" method="POST">
+        <label for="id">Insira o número do Bairro à ser alterado:</label>
+        <input type="text" name="id" placeholder="Insira o número" id="id" required>  
+
+        <label for="name">Nome:</label>
+        <input type="text" name="name" placeholder="Insira o Nome" id="name">
+
+        <label for="state">Estado:</label>
+        <input type="text" name="state" placeholder="Insira a Cidade" id="state">    
+
+        <label for="city">Cidade:</label>
+        <input type="text" name="city" placeholder="Insira a Cidade" id="city">        
+
+        <input type="submit" value="Atualizar" class="btnSubmit">
+    </form>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/principal.js"></script>
+</body>
+</html>
