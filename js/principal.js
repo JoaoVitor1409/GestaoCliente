@@ -15,7 +15,6 @@ $(document).ready(function(){
     var btn = $(".btnSubmit");
     btn.click(function(){
 
-        var dataCli = $(".clientForm").serialize();
         var dataDis = $(".districtForm").serialize();
         var dataCit = $(".cityForm").serialize();
         var dataCliRem = $(".clientFormDel").serialize();
@@ -23,23 +22,7 @@ $(document).ready(function(){
         var dataDisUp = $(".districtFormUp").serialize();
         var dataCitUp = $(".cityFormUp").serialize();
         
-        if(dataCli != ""){
-            $.ajax({
-                url: "../php/insertClient.php",
-                method: "POST",
-                data: dataCli,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){   
-                        errorSend();
-                    }
-                }
-            });
-        }else if(dataDis != ""){
+        if(dataDis != ""){
             $.ajax({
                 url: "../php/insertDistrict.php",
                 method: "POST",
@@ -140,4 +123,27 @@ $(document).ready(function(){
 
         return false;
     })
+   
+    var cliForm = $("form[name='clientForm']");
+    cliForm.submit(function() {
+        $(this).ajaxSubmit({
+            url: "../php/insertClient.php",
+            method: "POST",
+            data: {acao: "Cadastro", envia: "true"},
+            //clearForm: true,
+            //resetForm: true,
+            dataType: "json",
+            success: function(result){
+                //result['code'] == 1 ? success(result['message']) : errorData(result['message']);
+                console.log(result);
+            },
+            error: function(e){
+                console.log(e.status);                    
+                if(e.status == 404){
+                    errorSend();
+                }
+            }
+        });
+        return false;
+    });
 });

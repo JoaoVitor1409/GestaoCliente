@@ -10,7 +10,7 @@
 
     <div class="result"></div>
 
-    <form class="clientForm" action="../php/insertClient.php" method="POST">
+    <form class="clientForm" name="clientForm" action="../php/insertClient.php" method="POST">
         <label for="name">Nome:</label>
         <input type="text" name="name" placeholder="Insira o Nome" id="name" required>
 
@@ -26,7 +26,7 @@
         <input type="radio" name="gender"value="O" required>Outro
 
         <label for="photo">Foto:</label>
-        <input type="text" name="photo" placeholder="Insira a Foto" id="photo" required>
+        <input type="file" name="photo" id="photo" required>
 
         <label for="state">Estado:</label>
         <input type="text" name="state" placeholder="Insira o Estado" id="state" required>
@@ -41,6 +41,7 @@
     </form>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/jquery.form.js"></script>
     <script src="../js/principal.js"></script>
 </body>
 </html>

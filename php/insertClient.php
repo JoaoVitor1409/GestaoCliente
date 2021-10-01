@@ -1,5 +1,14 @@
 <?php
 
+
+$return['code'] = 0;
+$return['message'] = $_POST;
+
+echo json_encode($return);
+    
+
+/*
+
     require __DIR__ . "/../admin/crud.php";
 
     $name = $_POST['name'];
@@ -104,3 +113,5 @@
         }
     }
     echo json_encode($return);
+    */
+
