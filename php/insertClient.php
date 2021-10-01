@@ -1,21 +1,10 @@
-<?php
-
-
-$return['code'] = 0;
-$return['message'] = $_POST;
-
-echo json_encode($return);
-    
-
-/*
-
+<?php    
     require __DIR__ . "/../admin/crud.php";
 
     $name = $_POST['name'];
     $cpf = $_POST['cpf'];
     $date = $_POST['date'];
     $gender = $_POST['gender'];
-    $photo = $_POST['photo'];
     $state = $_POST['state'];
     $city = $_POST['city'];
     $district = $_POST['district'];
@@ -29,7 +18,7 @@ echo json_encode($return);
     }elseif($date == ""){
         $return["code"] = "0";
         $return["message"] = "Data de Nascimento não pode ser vazio";
-    }elseif($photo == ""){
+    }elseif(!$_FILES){
         $return["code"] = "0";
         $return["message"] = "Deve conter um arquivo de Foto";
     }elseif($state == ""){
@@ -43,6 +32,8 @@ echo json_encode($return);
         $return["message"] = "Bairro não pode ser vazio";
     }else{
         
+        $photoName = $_FILES['photo']['name'];
+
         $condition = [
             "CidadeNome" => $city
         ];
@@ -103,7 +94,7 @@ echo json_encode($return);
             "ClienteCPF" => $cpf,
             "ClienteDataNasc" => $date,
             "ClienteSexo" => $gender,
-            "ClienteFoto" => $photo,
+            "ClienteFoto" => $photoName,
             "ClienteAtivo" => true,
             "BairroID" => $districtID
         ];
@@ -113,5 +104,4 @@ echo json_encode($return);
         }
     }
     echo json_encode($return);
-    */
-
+?>

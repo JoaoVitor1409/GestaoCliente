@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     var btn = $(".btnSubmit");
     btn.click(function(){
-
+        alert('novo teste');
         var dataDis = $(".districtForm").serialize();
         var dataCit = $(".cityForm").serialize();
         var dataCliRem = $(".clientFormDel").serialize();
@@ -126,16 +126,17 @@ $(document).ready(function(){
    
     var cliForm = $("form[name='clientForm']");
     cliForm.submit(function() {
+        alert('senta e chora');
         $(this).ajaxSubmit({
             url: "../php/insertClient.php",
             method: "POST",
-            data: {acao: "Cadastro", envia: "true"},
-            //clearForm: true,
+            clearForm: true,
             //resetForm: true,
-            dataType: "json",
+            dataType: "json", //desculpa kkkk 
             success: function(result){
-                //result['code'] == 1 ? success(result['message']) : errorData(result['message']);
                 console.log(result);
+                result["code"] == "0" ? errorData(result["message"]) : success(result["message"]);
+                //console.log(result);
             },
             error: function(e){
                 console.log(e.status);                    
