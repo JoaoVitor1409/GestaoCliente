@@ -12,9 +12,27 @@ $(document).ready(function(){
         result.empty().html("<p class='error'>"+ message + "</p>").fadeIn("fast");
     }
 
+    function signupGeneric(action, data){
+        $.ajax({
+            url: "../php/control.php",
+            method: "POST",
+            data: data + "&action="+action,
+            dataType: "json",
+            success: function(result){
+                result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
+            },
+            error: function(e){
+                console.log(e.status);                    
+                if(e.status == 404){
+                    errorSend();
+                }
+            }
+        });
+    }
+
+
     var btn = $(".btnSubmit");
     btn.click(function(){
-        alert('novo teste');
         var dataDis = $(".districtForm").serialize();
         var dataCit = $(".cityForm").serialize();
         var dataCliRem = $(".clientFormDel").serialize();
@@ -23,102 +41,21 @@ $(document).ready(function(){
         var dataCitUp = $(".cityFormUp").serialize();
         
         if(dataDis != ""){
-            $.ajax({
-                url: "../php/insertDistrict.php",
-                method: "POST",
-                data: dataDis,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){
-                        errorSend();
-                    }
-                }
-            });
+            signupGeneric("insertDistrict", dataDis);
+
         }else if(dataCit != ""){
-            $.ajax({
-                url: "../php/insertCity.php",
-                method: "POST",
-                data: dataCit,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){
-                        errorSend();
-                    }
-                }
-            });
+            signupGeneric("insertCity", dataCit);
+
         }else if(dataCliRem != ""){
-            $.ajax({
-                url: "../php/deleteClient.php",
-                method: "POST",
-                data: dataCliRem,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){
-                        errorSend();
-                    }
-                }
-            });
+            signupGeneric("deleteClient", dataCliRem);
+
         }else if(dataCliUp != ""){
-            $.ajax({
-                url: "../php/updateClient.php",
-                method: "POST",
-                data: dataCliUp,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){
-                        errorSend();
-                    }
-                }
-            });
+            signupGeneric("updateClient", dataCliUp);
         }else if(dataDisUp != ""){
-            $.ajax({
-                url: "../php/updateDistrict.php",
-                method: "POST",
-                data: dataDisUp,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){
-                        errorSend();
-                    }
-                }
-            });
+            signupGeneric("updateDistrict", dataDisUp);
         }
         else if(dataCitUp != ""){
-            $.ajax({
-                url: "../php/updateCity.php",
-                method: "POST",
-                data: dataCitUp,
-                dataType: "json",
-                success: function(result){
-                    result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
-                },
-                error: function(e){
-                    console.log(e.status);                    
-                    if(e.status == 404){
-                        errorSend();
-                    }
-                }
-            });
+            signupGeneric("updateCity", dataCitUp);
         }
 
         return false;
@@ -126,11 +63,11 @@ $(document).ready(function(){
    
     var cliForm = $("form[name='clientForm']");
     cliForm.submit(function() {
-        alert('senta e chora');
         $(this).ajaxSubmit({
-            url: "../php/insertClient.php",
+            url: "../php/control.php",
             method: "POST",
             clearForm: true,
+            data: {action: 'insertClient'},
             //resetForm: true,
             dataType: "json", //desculpa kkkk 
             success: function(result){
