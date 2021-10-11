@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     var result = $(".result");
 
     function success(message) {
@@ -19,7 +18,7 @@ $(document).ready(function(){
             data: data + "&action="+action,
             dataType: "json",
             success: function(result){
-                result["code"] == 0 ? errorData(result["message"]) : success(result["message"]);
+                result['code'] != 0 ? success(result['message']) : errorData(result['message']);
             },
             error: function(e){
                 console.log(e.status);                    
@@ -29,7 +28,6 @@ $(document).ready(function(){
             }
         });
     }
-
 
     var btn = $(".btnSubmit");
     btn.click(function(){
@@ -59,8 +57,8 @@ $(document).ready(function(){
         }
 
         return false;
-    })
-   
+    })   
+
     var cliForm = $("form[name='clientForm']");
     cliForm.submit(function() {
         $(this).ajaxSubmit({
@@ -84,4 +82,5 @@ $(document).ready(function(){
         });
         return false;
     });
+
 });

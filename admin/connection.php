@@ -9,6 +9,24 @@
         return $mysqli;
     }
 
+    function FixCodeSql($data){
+        $mysqli = OpenConnection();
+
+        if(!is_array($data)){
+            $dados = mysqli_real_escape_string($mysqli, $data);
+        }else{
+            foreach($data as $key => $value){
+                $key = mysqli_real_escape_string($mysqli, $key);
+                $value = mysqli_real_escape_string($mysqli, $value);
+
+                $dados[$key] = $value;
+            }
+
+            CloseConnection($mysqli);
+            return $data;
+        }
+    }
+
     function CloseConnection($mysqli){
         mysqli_close($mysqli) or die(mysqli_error($mysqli));
     }

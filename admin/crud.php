@@ -3,6 +3,7 @@
     require __DIR__ . "/connection.php";
 
     function Insert($table, array $data){
+        FixCodeSql($data);
         $rows = implode(",", array_keys($data));
         $values = "'" . implode("','", $data) . "'";
         $sql = "INSERT INTO {$table}({$rows}) values({$values});";
@@ -56,8 +57,8 @@
         }
     }
 
-    function Update($table, $data, array $condition = null, $logiOper = null){
-
+    function Update($table, array $data, array $condition = null, $logiOper = null){
+        FixCodeSql($data);
         if($condition){
             foreach($condition as $key => $value){
                 $conditions[] = " {$key} = '{$value}' ";
@@ -92,15 +93,29 @@
         }
     }
 
-    function Delete($table, $clientID){                
+    function Delete($table, array $condition, $logiOper = null){                
+        if($condition){
+            foreach($condition as $key => $value){
+                $conditions[] = " {$key} = '{$value}' ";
+            }
 
-        $data = [
-            "ClienteAtivo" => 0
-        ];
-        $condition = [
-            "ClienteID" => $clientID
-        ];
-        $result = Update($table, $data, $condition);
+            if(count($conditions) > 1 && !$logiOper){
+                $logiOper = "&&";
+            }elseif($logiOper == "and"){
+                $logiOper = "&&";
+            }elseif($logiOper == "our"){
+                $logiOper = "||";
+            }
+
+            $conditions = implode($logiOper, $conditions);
+
+            $condition_phrase = "WHERE {$conditions}";
+        }else{
+            $condition_phrase = null;
+        }
+        
+        $sql = "Delete from {$table} {$condition_phrase}";
+        $result = Execute($sql);
 
         if($result == 1){
             return true;

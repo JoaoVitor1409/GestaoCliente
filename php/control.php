@@ -3,8 +3,75 @@
     require __DIR__ . "/../admin/crud.php";
 
     switch ($_POST['action']) {
+
+        case 'readClient':
+            $client = $_POST['client'];            
+            if($client){
+                $condition = [
+                    "ClienteNome" => $client,
+                    "ClienteAtivo" => 1
+                ];
+                $result = Read("Cliente", "ClienteID, ClienteNome, ClienteCPF, ClienteDataNasc, ClienteSexo, BairroID", $condition, true, "and"); 
+            }else{
+                $condition = [
+                    "ClienteAtivo" => 1
+                ];
+                $result = Read("Cliente", "*", $condition);
+            }
+            for ($i=0; $i < sizeof($result); $i++) { 
+                $condition = [
+                    "BairroID" => $result[$i]['BairroID']
+                ];
+                $district = Read("Bairro", "CidadeID, BairroNome", $condition);
+                $condition = [
+                    "CidadeID" => $district[0]["CidadeID"]
+                ];
+                $city = Read("Cidade", "CidadeNome", $condition);
+
+                $result[$i]['BairroNome'] = $district[0]['BairroNome'];
+                $result[$i]['CidadeNome'] = $city[0]['CidadeNome'];
+            }
+            echo json_encode($result);
+
+        break;
+
+        case 'readDistrict':
+            $district = $_POST["district"];
+            if(!$district){
+               $result = Read("Bairro");
+            }else{
+                $condition = [
+                    "BairroNome" => $district
+                ];
+                $result = Read("Bairro", "BairroID, BairroNome, CidadeID", $condition, true);          
+            }
+            for ($i=0; $i < sizeof($result); $i++) { 
+                $condition = [
+                    "CidadeID" => $result[$i]["CidadeID"]
+                ];
+                $city = Read("Cidade", "CidadeNome", $condition);
+                
+                $result[$i]['CidadeNome'] = $city[0]['CidadeNome'];
+            }
+            echo json_encode($result);
+        break;
+
+        case 'readCity':
+            $city = $_POST["city"];
+            if(!$city){
+               $result = Read("Cidade");
+            }else{
+                $condition = [
+                    "CidadeNome" => $city
+                ];
+                $result = Read("Cidade", "CidadeID, CidadeNome, CidadeUF", $condition, true);          
+            }
+            echo json_encode($result);
+        break;
+
         case 'insertDistrict':
             $name = $_POST['name'];
+            $state = $_POST['state'];
             $city = $_POST['city'];
 
             if($name == ""){
@@ -14,9 +81,25 @@
                 $return["code"] = "0";
                 $return["message"] = "Cidade não pode ser vazio";
             }else{
+                $condition = [
+                    "CidadeNome" => $city,
+                    "CidadeUF" => $state
+                ];
+                $resultCity = Read("Cidade", "*", $condition);
+                if($resultCity){
+                    $cityId = $resultCity[0]['CidadeID'];
+                }else{
+                    $data = [
+                        "CidadeNome" => $city,
+                        "CidadeUF" => $state
+                    ];
+                    Insert("Cidade", $data)
+                    ;$resultCity = Read("Cidade", "*", $condition);
+                    $cityId = $resultCity[0]['CidadeID'];
+                }
                 $data = [
                     "BairroNome" => $name,
-                    "CidadeID" => 1
+                    "CidadeID" => $cityId
                 ];
                 if(Insert("Bairro",$data)){
                     $return["code"] = "1";
@@ -150,21 +233,6 @@
                 if(Insert("Cliente", $data)){
                     $return["code"] = "1";
                     $return["message"] = "Cliente cadastrado com sucesso!";
-                }
-            }
-            echo json_encode($return);
-        break;
-
-        case 'deleteClient':
-            $id = $_POST['id'];
-
-            if(!$id){
-                $return["code"] = 0;
-                $return["message"] = "ID não pode ser vazio";
-            }else{
-                if(Delete("Cliente", $id)){
-                    $return["code"] = 1;
-                    $return["message"] = "Cliente removido com sucesso!";
                 }
             }
             echo json_encode($return);
@@ -359,6 +427,44 @@
                 }    
             }
         
+            echo json_encode($return);
+        break;
+
+        case 'deleteClient':
+            $data = [
+                "ClienteAtivo" => 0
+            ];
+            $condition = [
+                "ClienteID" => $_POST['id']
+            ];
+            if(Update("Cliente", $data, $condition)){
+                    $return["code"] = 1;
+                    $return["message"] = "Cliente removido com sucesso!";
+            }
+            echo json_encode($return);
+        break;
+
+        case 'deleteDistrict':
+            $condition = [
+                "BairroID" => $_POST['id']
+            ];
+
+            if(Delete("Bairro", $condition)){
+                    $return["code"] = 1;
+                    $return["message"] = "Bairro removido com sucesso!";
+            }
+            echo json_encode($return);
+        break;
+
+        case 'deleteCity':
+            $condition = [
+                "CidadeID" => $_POST['id']
+            ];
+
+            if(Delete("Cidade", $condition)){
+                    $return["code"] = 1;
+                    $return["message"] = "Cidade removida com sucesso!";
+            }
             echo json_encode($return);
         break;
 
