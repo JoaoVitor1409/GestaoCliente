@@ -1,3 +1,8 @@
+<?php
+    include __DIR__ . "/../php/loginVerify.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,12 +15,9 @@
 
     <div class="result"></div>
 
-    <form class="districtFormUp" action="../php/updateDistrict.php" method="POST">
-        <label for="id">Insira o número do Bairro à ser alterado:</label>
-        <input type="text" name="id" placeholder="Insira o número" id="id" required>  
-
+    <form class="districtForm" action="../php/insertDistrict.php" method="POST">
         <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Insira o Nome" id="name">
+        <input type="text" name="name" placeholder="Insira o Nome" id="name" required>
 
         <label for="state">Estado:</label>
         <select name="state">
@@ -46,12 +48,12 @@
             <option value="SP">SP</option>
             <option value="SE">SE</option>
             <option value="TO">TO</option>
-        </select>       
+        </select>   
 
         <label for="city">Cidade:</label>
-        <input type="text" name="city" placeholder="Insira a Cidade" id="city">        
+        <input type="text" name="city" placeholder="Insira a Cidade" id="city" required>
 
-        <input type="submit" value="Atualizar" class="btnSubmit">
+        <input type="submit" value="Inserir" class="btnSubmit">
     </form>
 
     <script src="../js/jquery-3.6.0.min.js"></script>

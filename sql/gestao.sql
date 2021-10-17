@@ -20,8 +20,20 @@ Create table Cliente(
     ClienteCPF varchar(11) not null,
     ClienteDataNasc date not null,
     ClienteSexo char(1) not null,
-	ClienteFoto varchar(50),
+	ClienteFoto varchar(50) not null,
     ClienteAtivo boolean not null,
+    BairroID int not null,
+    Foreign key(BairroID) references Bairro(BairroID)
+);
+
+Create table Funcionario(
+	FuncionarioID int not null primary key auto_increment,
+    FuncionarioNome varchar(100) not null,
+    FuncionarioCPF varchar(11) not null,
+    FuncionarioDataNasc date not null,
+    FuncionarioSexo char(1) not null,
+	FuncionarioFoto varchar(50) not null,
+    FuncionarioAtivo boolean not null,
     BairroID int not null,
     Foreign key(BairroID) references Bairro(BairroID)
 );

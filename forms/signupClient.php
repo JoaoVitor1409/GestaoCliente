@@ -1,3 +1,6 @@
+<?php
+    include __DIR__ . "/../php/loginVerify.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,9 +13,23 @@
 
     <div class="result"></div>
 
-    <form class="districtForm" action="../php/insertDistrict.php" method="POST">
+    <form class="clientForm" name="clientForm" action="../php/insertClient.php" method="POST">
         <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Insira o Nome" id="name" required>
+        <input type="text" name="name" placeholder="Insira o Nome" id="name" >
+
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" placeholder="Insira o CPF" id="cpf" >
+
+        <label for="date">Data de Nascimento:</label>
+        <input type="date" name="date" id="date" >
+
+        <label>Sexo:</label>
+        <input type="radio" name="gender" checked="checked" value="M" >Homem
+        <input type="radio" name="gender" value="F" >Mulher
+        <input type="radio" name="gender"value="O" >Outro
+
+        <label for="photo">Foto:</label>
+        <input type="file" name="photo" id="photo" >
 
         <label for="state">Estado:</label>
         <select name="state">
@@ -46,12 +63,16 @@
         </select>   
 
         <label for="city">Cidade:</label>
-        <input type="text" name="city" placeholder="Insira a Cidade" id="city" required>
+        <input type="text" name="city" placeholder="Insira a Cidade" id="city" >
 
-        <input type="submit" value="Inserir" class="btnSubmit">
+        <label for="district">Bairro:</label>
+        <input type="text" name="district" placeholder="Insira o Bairro" id="district" >             
+
+        <input type="submit" value="Inserir">
     </form>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/jquery.form.js"></script>
     <script src="../js/principal.js"></script>
 </body>
 </html>

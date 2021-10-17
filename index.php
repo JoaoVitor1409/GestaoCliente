@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    $valor = isset($_SESSION['login']) ? true : false;
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -6,10 +10,32 @@
         <script src="js/icones.js"></script>
         <title>Página Principal</title>
     </head>
-    <body>
+    <body>    
         <div class="header">
-            <h1>Bem Vindo!</h1>
+            <?php if($valor){?>
+            <h1>Bem vindo <?=$_SESSION['user']['username']?></h1>
+            <?php }?>
+            <a href="forms/login.php">Login</a>
+            <a href="php/logout.php">Logout</a>            
         </div>
+
+        <?php if($valor){?>
+
+        <div class="employee">
+            <h1>Funcionarios:</h1>
+
+            <form class="employeeForm" action="php/readEmployee.php" method="POST">
+                <input type="text" placeholder="Buscar Funcionario" name="employee">
+                <input type="submit" value="Buscar" class="btnSearchEmp">
+            </form>
+
+            <div id="readEmployee"></div>
+
+            <a href="forms/signupEmployee.php">Inserir Funcionario</a>
+        </div>
+
+        <?php }?>
+        
         <div class="client">
             <h1>Clientes:</h1>
 
@@ -20,9 +46,7 @@
 
             <div id="readClient"></div>
 
-            <a href="html/signupClient.html">Inserir Cliente</a>
-            <a href="html/updateClient.html">Atualizar Cliente</a>
-            
+            <a href="forms/signupClient.php">Inserir Cliente</a>            
         </div>
         <div class="district">
             <h1>Bairros:</h1>
@@ -34,8 +58,7 @@
 
             <div id="readDistrict"></div>
 
-            <a href="html/signupDistrict.html">Inserir Bairro</a>
-            <a href="html/updateDistrict.html">Atualizar Bairro</a>
+            <a href="forms/signupDistrict.php">Inserir Bairro</a>
         </div>
         <div class="city">
             <h1>Cidades:</h1>
@@ -47,8 +70,7 @@
 
             <div id="readCity"></div>
 
-            <a href="html/signupCity.html">Inserir uma nova Cidade</a>
-            <a href="html/updateCity.html">Atualizar Cidade</a>
+            <a href="forms/signupCity.php">Inserir uma nova Cidade</a>
         </div>
 
         <script src="js/jquery-3.6.0.min.js"></script>

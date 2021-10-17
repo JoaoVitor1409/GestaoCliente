@@ -1,18 +1,41 @@
+<?php
+    include __DIR__ . "/../php/loginVerify.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Clientes</title>
+    <title>Cadastro de Funcionarios</title>
 </head>
 <body>
 
     <div class="result"></div>
 
-    <form class="cityForm" action="../php/insertCity.php" method="POST">
+    <form class="employeeForm" name="employeeForm" action="../php/insertEmployee.php" method="POST">
         <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Insira o Nome" id="name" required>
+        <input type="text" name="name" placeholder="Insira o Nome" id="name" >
+
+        <label for="username">Usuário:</label>
+        <input type="text" name="username" placeholder="Insira o nome de usuário" id="username" >
+
+        <label for="ps">Senha:</label>
+        <input type="password" name="ps" placeholder="Insira a sua senha" id="ps" >
+
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" placeholder="Insira o CPF" id="cpf" >
+
+        <label for="date">Data de Nascimento:</label>
+        <input type="date" name="date" id="date" >
+
+        <label>Sexo:</label>
+        <input type="radio" name="gender" checked="checked" value="M" >Homem
+        <input type="radio" name="gender" value="F" >Mulher
+        <input type="radio" name="gender"value="O" >Outro
+
+        <label for="photo">Foto:</label>
+        <input type="file" name="photo" id="photo" >
 
         <label for="state">Estado:</label>
         <select name="state">
@@ -45,10 +68,17 @@
             <option value="TO">TO</option>
         </select>   
 
-        <input type="submit" value="Inserir" class="btnSubmit">
+        <label for="city">Cidade:</label>
+        <input type="text" name="city" placeholder="Insira a Cidade" id="city" >
+
+        <label for="district">Bairro:</label>
+        <input type="text" name="district" placeholder="Insira o Bairro" id="district" >             
+
+        <input type="submit" value="Inserir">
     </form>
 
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/jquery.form.js"></script>
     <script src="../js/principal.js"></script>
 </body>
 </html>
