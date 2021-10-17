@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/icones.js"></script>
         <title>Página Principal</title>
     </head>
     <body>
@@ -16,8 +17,10 @@
                 <input type="text" placeholder="Buscar Cliente" name="client">
                 <input type="submit" value="Buscar" class="btnSearchCli">
             </form>
+
+            <div id="readClient"></div>
+
             <a href="html/signupClient.html">Inserir Cliente</a>
-            <a href="html/removeClient.html">Remover Cliente</a>
             <a href="html/updateClient.html">Atualizar Cliente</a>
             
         </div>
@@ -28,6 +31,8 @@
                 <input type="text" placeholder="Buscar Bairro" name="district">
                 <input type="submit" value="Buscar" class="btnSearchDis">
             </form>
+
+            <div id="readDistrict"></div>
 
             <a href="html/signupDistrict.html">Inserir Bairro</a>
             <a href="html/updateDistrict.html">Atualizar Bairro</a>
@@ -40,8 +45,14 @@
                 <input type="submit" value="Buscar" class="btnSearchCity">
             </form>
 
+            <div id="readCity"></div>
+
             <a href="html/signupCity.html">Inserir uma nova Cidade</a>
             <a href="html/updateCity.html">Atualizar Cidade</a>
         </div>
+
+        <script src="js/jquery-3.6.0.min.js"></script>
+        <script src="js/sweetalert2.js"></script>
+        <script src="js/read.js"></script>
     </body>
 </html>
