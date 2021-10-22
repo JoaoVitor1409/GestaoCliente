@@ -1,5 +1,6 @@
 <?php
     include __DIR__ . "/../php/loginVerify.php";
+    include __DIR__ . "/../admin/crud.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,6 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/icones.js"></script>
     <title>Cadastro de Funcionarios</title>
 </head>
 <body>
@@ -15,19 +17,19 @@
 
     <form class="employeeForm" name="employeeForm" action="../php/insertEmployee.php" method="POST">
         <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Insira o Nome" id="name" >
+        <input type="text" name="name" placeholder="Insira o Nome" id="name">
 
         <label for="username">Usuário:</label>
-        <input type="text" name="username" placeholder="Insira o nome de usuário" id="username" >
+        <input type="text" name="username" placeholder="Insira o nome de usuário" id="username">
 
         <label for="ps">Senha:</label>
-        <input type="password" name="ps" placeholder="Insira a sua senha" id="ps" >
+        <input type="password" name="ps" placeholder="Insira a sua senha" id="ps">
 
         <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" placeholder="Insira o CPF" id="cpf" >
+        <input type="text" name="cpf" placeholder="Insira o CPF" id="cpf">
 
         <label for="date">Data de Nascimento:</label>
-        <input type="date" name="date" id="date" >
+        <input type="date" name="date" id="date">
 
         <label>Sexo:</label>
         <input type="radio" name="gender" checked="checked" value="M" >Homem
@@ -69,10 +71,26 @@
         </select>   
 
         <label for="city">Cidade:</label>
-        <input type="text" name="city" placeholder="Insira a Cidade" id="city" >
+        <input type="text" name="city" placeholder="Insira a Cidade" id="city">
 
         <label for="district">Bairro:</label>
-        <input type="text" name="district" placeholder="Insira o Bairro" id="district" >             
+        <input type="text" name="district" placeholder="Insira o Bairro" id="district">    
+        
+        <label>Módulo:</label>
+            <select name="module">
+                <option value="NA">Nenhum Módulo</option>
+                <?php 
+                    $result = Read("Modulo", "*");
+                    foreach($result as $module){?>
+                        <option value="<?=$module['ModuloID']?>"><?=$module['ModuloNome']?></option>                
+                <?php }?>                
+        </select>   
+
+        <div id="modules">
+                     
+        </div>
+        <span class="fas fa-plus addModule"></span>
+        <span class="fas fa-minus remModule"></span>
 
         <input type="submit" value="Inserir">
     </form>

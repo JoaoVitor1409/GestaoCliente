@@ -259,4 +259,31 @@
                 <script src="../js/principal.js"></script>
             </body>
         </html>
+    <?php
+    }elseif($action == 'updateModule'){?>
+        <!DOCTYPE html>
+        <html lang="pt-br">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Atualização de Módulos</title>
+            </head>
+            <body>
+
+                <div class="result"></div>
+
+                <form class="moduleFormUp" action="../php/updateModule.php" method="POST">
+                    <input type="hidden" name="id" value="<?=$id?>">   
+
+                    <label for="name">Nome:</label>
+                    <input type="text" name="name" placeholder="Insira o Nome" id="name">          
+
+                    <input type="submit" value="Atualizar" class="btnSubmit">
+                </form>
+
+                <script src="../js/jquery-3.6.0.min.js"></script>
+                <script src="../js/principal.js"></script>
+            </body>
+        </html>
     <?php }

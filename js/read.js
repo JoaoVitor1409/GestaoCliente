@@ -100,6 +100,25 @@ $(document).ready(function(){
                             }else{
                                 $("#readCity").html("<p>Nenhuma cidade encontrada!</p>");
                             }
+                        }else if(action == "readModule"){
+                            if(result){
+                                $("#readModule").html("<table id='tableCit'>"+
+                                "<thead><th>Código</th><th>Nome</th><th>Atualizar</th><th>Excluir</th>"+
+                                "<tbody>"+              
+                                "</tbody></table>");
+                                for (var i = 0; i < result.length; i++) {                            
+                                    $('#tableCit').append("<tr>"+
+                                    "<td>"+result[i]['ModuloID']+"</td>"+                            
+                                    "<td>"+result[i]['ModuloNome']+"</td>"+
+                                    "<td><form class='modFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['ModuloID']+"'>"+
+                                    "<input type='hidden' name='action' value='updateModule'><button type='submit' class='updateBtn'><span class='fas fa-pen'></span></button></form></td>"+
+                                    "<td><a href='#' class='deleteBtn' id='"+result[i]['ModuloID']+"'><span class='fas fa-trash'></span></a></td>"+
+                                    "</tr>"
+                                    );                        
+                                }
+                            }else{
+                                $("#readModule").html("<p>Nenhum módulo encontrado!</p>");
+                            }
                         }
                     break;
                 }
@@ -161,6 +180,14 @@ $(document).ready(function(){
         var dataCit = $(".cityForm").serialize();        
         readGeneric("readCity", dataCit, "table");
         
+        return false;
+    });
+
+    var btnMod = $(".btnSearchMod");
+    btnMod.click(function(){
+        var dataMod = $(".moduleForm").serialize();
+        readGeneric("readModule", dataMod, "table");
+
         return false;
     });
 
@@ -248,9 +275,30 @@ $(document).ready(function(){
           })        
         return false;
     });
+
+    $('#readModule').on('click', '.deleteBtn', function(){
+        var id = $(this).attr('id');
+        Swal.fire({
+            title: 'Alerta!',
+            text: "Você tem certeza que deseja excluir esse registro? Pode acontecer problemas dependendo do registro.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não',
+            confirmButtonText: 'Sim'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deleteGeneric('deleteModule', 'id='+id);
+                readGeneric("readModule", "city=", "table");
+            }
+          })        
+        return false;
+    });
     
     readGeneric("readEmployee", $(".employeeForm").serialize(), "table");
     readGeneric("readClient", $(".clientForm").serialize(), "table");
     readGeneric("readDistrict", $(".districtForm").serialize(), "table");
     readGeneric("readCity", $(".cityForm").serialize(), "table");
+    readGeneric("readModule", $(".moduleForm").serialize(), "table");
 });

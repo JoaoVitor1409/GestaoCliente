@@ -4,4 +4,3 @@
     if(!$valor){
         header("Location: ../forms/login.php");
     }
-?>
