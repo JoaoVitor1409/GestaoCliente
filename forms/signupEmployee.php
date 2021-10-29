@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/icones.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
     <title>Cadastro de Funcionarios</title>
 </head>
 <body>
@@ -16,6 +17,11 @@
     <div class="result"></div>
 
     <form class="employeeForm" name="employeeForm" action="../php/insertEmployee.php" method="POST">
+
+        <div class="loading">
+            <div class="progress"></div>
+        </div>
+
         <label for="name">Nome:</label>
         <input type="text" name="name" placeholder="Insira o Nome" id="name">
 

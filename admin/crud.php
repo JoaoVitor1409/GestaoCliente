@@ -23,8 +23,7 @@
                     $conditions[] = " {$key} LIKE '%{$value}%' ";
                 }else{
                     $conditions[] = " {$key} = '{$value}' ";
-                }
-                
+                }                
             }
 
             if(count($conditions) > 1 && !$logiOper){
@@ -39,6 +38,7 @@
             
             
             $condition_phrase = "WHERE {$conditions}";
+            
             
         }else{
             $condition_phrase = null;

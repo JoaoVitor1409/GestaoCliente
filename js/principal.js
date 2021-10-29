@@ -29,13 +29,23 @@ $(document).ready(function(){
         });
     }
 
+    var bar = $('.loading');
+    var pro = $('.progress');
+
+    bar.css("display", "none");
+
     function signupGenericForm(form, action){
         $(form).ajaxSubmit({
             url: "../php/control.php",
             method: "POST",
-            clearForm: false,
+            //clearForm: true,
             data: {action: action},
             dataType: "json",
+            uploadProgress: function(event, position, total, totalpercentage) {
+                bar.fadeIn("fast");
+                var percentage = totalpercentage + "%";
+                pro.width(percentage).text(percentage);
+            },            
             success: function(result){
                 result["code"] == "0" ? errorData(result["message"]) : success(result["message"]);
             },
@@ -44,6 +54,13 @@ $(document).ready(function(){
                 if(e.status == 404){
                     errorSend();
                 }
+            },
+            complete: function() {
+                window.setTimeout(function() {
+                    bar.fadeOut("slow", function() {
+                        pro.width('0%').text("0%");
+                    })
+                })
             }
         });
     }

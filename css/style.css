@@ -1,0 +1,13 @@
+.loading {
+    width: 489px;
+    background: #900;
+}
+
+.loading .progress {
+    padding: 5px;
+    background: #060;
+    width: 0%;
+    color: #FFF;
+    text-align: center;
+    max-width: 479px;
+}

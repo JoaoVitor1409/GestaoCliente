@@ -1,8 +1,8 @@
 <?php
     session_start();
     $on = isset($_SESSION['login']) ? true : false;
-    $signup = isset($_SESSION['user']['modules'][0]) ? true : false;
-    $read = isset($_SESSION['user']['modules'][1]) ? true : false;
+    $signup = @$_SESSION['user']['modules']['signup'];
+    $read = @$_SESSION['user']['modules']['read'];
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,9 +16,14 @@
         <div class="header">
             <?php if($on){?>
             <h1>Bem vindo <?=$_SESSION['user']['username']?></h1>
+            <img width="100" src="photos/<?= $_SESSION['user']['photo'] ?>"  alt="Foto do Usuário">
             <?php }?>
+            <?php if(!$on){?>
             <a href="forms/login.php">Login</a>
-            <a href="php/logout.php">Logout</a>            
+            <?php }?>
+            <?php if($on){?>
+            <a href="php/logout.php">Logout</a>
+            <?php }?>
         </div>
 
         <?php if($read){?>

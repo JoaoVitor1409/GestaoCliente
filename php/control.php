@@ -167,6 +167,28 @@
             }else{
                 $photoName = $_FILES['photo']['name'];
 
+                $file = '../photos/';
+                if(!file_exists($file)){
+                    mkdir($file, 0775);
+                }
+
+                $photoEx = strchr($photoName, ".");
+                $imgEx = ['.jpg', '.jpeg', '.png', '.gif'];
+
+                if(in_array($photoEx, $imgEx)){
+                    if(!move_uploaded_file($_FILES['photo']['tmp_name'], $file . $photoName)){
+                        $return["code"] = "0";
+                        $return["message"] = 'Imagem não enviada, por favor contate o suporte!';
+                        echo json_encode($return);
+                        return;
+                    }
+                }else{
+                    $return["code"] = "0";
+                    $return["message"] = 'Imagem não suportada';
+                    echo json_encode($return);
+                    return;
+                }
+
                 $condition = [
                     "CidadeNome" => $city
                 ];
@@ -901,7 +923,7 @@
                 ];
 
                 $modules = Read("FuncionarioModulo", "ModuloID", $condition);
-
+                
                 if($result){
                     $return['code'] = 1;
                     $return['message'] = "Bem vindo!";
@@ -912,9 +934,28 @@
                         'photo' => $result[0]['FuncionarioFoto'],
                     ];
                     if($modules){
-                        foreach ($modules as $value) {
-                            $_SESSION['user']['modules'][] = $value["ModuloID"];
+                        foreach ($modules as $value) {  
+                            $condition = [
+                                "ModuloID" => $value['ModuloID']
+                            ];
+                            $modulesNames[] = Read("Modulo", "ModuloNome", $condition);
                         }
+
+                        $_SESSION['user']['modules']['signup'] = false;
+                        $_SESSION['user']['modules']['read'] = false;
+
+                        if(isset($modulesNames[0][0]['ModuloNome'])){
+                             if($modulesNames[0][0]['ModuloNome'] == 'Cadastrar'){
+                                $_SESSION['user']['modules']['signup'] = true;
+                                if(isset($modulesNames[1][0]['ModuloNome'])){
+                                    if($modulesNames[1][0]['ModuloNome'] == 'Listar'){
+                                        $_SESSION['user']['modules']['read'] = true;
+                                    }
+                                }                                
+                            }else if($modulesNames[0][0]['ModuloNome'] == 'Listar'){
+                                $_SESSION['user']['modules']['read'] = true;
+                            }
+                        }                        
                     }
                 }else{
                     $return['code'] = 0;

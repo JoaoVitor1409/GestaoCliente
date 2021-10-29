@@ -102,12 +102,12 @@ $(document).ready(function(){
                             }
                         }else if(action == "readModule"){
                             if(result){
-                                $("#readModule").html("<table id='tableCit'>"+
+                                $("#readModule").html("<table id='tableMod'>"+
                                 "<thead><th>Código</th><th>Nome</th><th>Atualizar</th><th>Excluir</th>"+
                                 "<tbody>"+              
                                 "</tbody></table>");
                                 for (var i = 0; i < result.length; i++) {                            
-                                    $('#tableCit').append("<tr>"+
+                                    $('#tableMod').append("<tr>"+
                                     "<td>"+result[i]['ModuloID']+"</td>"+                            
                                     "<td>"+result[i]['ModuloNome']+"</td>"+
                                     "<td><form class='modFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['ModuloID']+"'>"+
@@ -139,6 +139,11 @@ $(document).ready(function(){
             data: data + "&action="+action,
             dataType: "json",
             success: function(result){
+                Swal.fire(
+                    'Delteado!',
+                    result['message'],
+                    'success'
+                  )
                 if(result['logout']){
                     window.location.href = 'php/logout.php';
                 }
