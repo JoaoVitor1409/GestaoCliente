@@ -9,10 +9,37 @@ $(document).ready(function(){
             success: function(result){
                 switch (type) {
                     case "table":
-                        if(action == "readClient"){
+                        if(action == "readEmployee"){
+                            if(result){
+                                $("#readEmployee").html("<table id='tableEmp'>"+
+                                "<thead><th>Código</th><th>Nome</th><th>Usuário</th><th>CPF</th><th>Data de Nascimento</th><th>Gênero</th>"+
+                                "<th>Bairro</th><th>Cidade</th><th>Atualizar</th><th>Excluir</th>"+
+                                "<tbody>"+              
+                                "</tbody></table>");
+                                for (var i = 0; i < result.length; i++) {                            
+                                    $('#tableEmp').append("<tr>"+
+                                    "<td>"+result[i]['FuncionarioID']+"</td>"+                            
+                                    "<td>"+result[i]['FuncionarioNome']+"</td>"+
+                                    "<td>"+result[i]['FuncionarioUsuario']+"</td>"+                            
+                                    "<td>"+result[i]['FuncionarioCPF']+"</td>"+
+                                    "<td>"+result[i]['FuncionarioDataNasc']+"</td>"+
+                                    "<td>"+result[i]['FuncionarioSexo']+"</td>"+
+                                    "<td>"+result[i]['BairroNome']+"</td>"+
+                                    "<td>"+result[i]['CidadeNome']+"</td>"+
+                                    "<td><form class='empFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['FuncionarioID']+"'>"+
+                                    "<input type='hidden' name='action' value='updateEmployee'><button type='submit' class='updateBtn'><span class='fas fa-pen'></span></button></form></td>"+
+                                    "<td><a href='#' class='deleteBtn' id='"+result[i]['FuncionarioID']+"'><span class='fas fa-trash'></span></a></td>"+
+                                    "</tr>"
+                                    );                        
+                                }
+                            }else{
+                                $("#readEmployee").html("<p>Nenhum funcionário encontrado!</p>");
+                            }
+                        }else if(action == "readClient"){
                             if(result){
                                 $("#readClient").html("<table id='tableCli'>"+
-                                "<thead><th>Código</th><th>Nome</th><th>CPF</th><th>Data de Nascimento</th><th>Gênero</th><th>Bairro</th><th>Cidade</th><th>Excluir</th>"+
+                                "<thead><th>Código</th><th>Nome</th><th>CPF</th><th>Data de Nascimento</th><th>Gênero</th>"+
+                                "<th>Bairro</th><th>Cidade</th><th>Atualizar</th><th>Excluir</th>"+
                                 "<tbody>"+              
                                 "</tbody></table>");
                                 for (var i = 0; i < result.length; i++) {                            
@@ -24,6 +51,8 @@ $(document).ready(function(){
                                     "<td>"+result[i]['ClienteSexo']+"</td>"+
                                     "<td>"+result[i]['BairroNome']+"</td>"+
                                     "<td>"+result[i]['CidadeNome']+"</td>"+
+                                    "<td><form class='CliFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['ClienteID']+"'>"+
+                                    "<input type='hidden' name='action' value='updateClient'><button type='submit' class='updateBtn'><span class='fas fa-pen'></span></button></form></td>"+
                                     "<td><a href='#' class='deleteBtn' id='"+result[i]['ClienteID']+"'><span class='fas fa-trash'></span></a></td>"+
                                     "</tr>"
                                     );                        
@@ -34,7 +63,7 @@ $(document).ready(function(){
                         }else if(action == "readDistrict"){
                             if(result){
                                 $("#readDistrict").html("<table id='tableDis'>"+
-                                "<thead><th>Código</th><th>Nome</th><th>Cidade</th><th>Excluir</th>"+
+                                "<thead><th>Código</th><th>Nome</th><th>Cidade</th><th>Atualizar</th><th>Excluir</th>"+
                                 "<tbody>"+              
                                 "</tbody></table>");
                                 for (var i = 0; i < result.length; i++) {                            
@@ -42,6 +71,8 @@ $(document).ready(function(){
                                     "<td>"+result[i]['BairroID']+"</td>"+                            
                                     "<td>"+result[i]['BairroNome']+"</td>"+
                                     "<td>"+result[i]['CidadeNome']+"</td>"+
+                                    "<td><form class='disFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['BairroID']+"'>"+
+                                    "<input type='hidden' name='action' value='updateDistrict'><button type='submit' class='updateBtn'><span class='fas fa-pen'></span></button></form></td>"+
                                     "<td><a href='#' class='deleteBtn' id='"+result[i]['BairroID']+"'><span class='fas fa-trash'></span></a></td>"+
                                     "</tr>"
                                     );                        
@@ -52,7 +83,7 @@ $(document).ready(function(){
                         }else if(action == "readCity"){
                             if(result){
                                 $("#readCity").html("<table id='tableCit'>"+
-                                "<thead><th>Código</th><th>Nome</th><th>Estado</th><th>Excluir</th>"+
+                                "<thead><th>Código</th><th>Nome</th><th>Estado</th><th>Atualizar</th><th>Excluir</th>"+
                                 "<tbody>"+              
                                 "</tbody></table>");
                                 for (var i = 0; i < result.length; i++) {                            
@@ -60,57 +91,36 @@ $(document).ready(function(){
                                     "<td>"+result[i]['CidadeID']+"</td>"+                            
                                     "<td>"+result[i]['CidadeNome']+"</td>"+
                                     "<td>"+result[i]['CidadeUF']+"</td>"+
+                                    "<td><form class='citFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['CidadeID']+"'>"+
+                                    "<input type='hidden' name='action' value='updateCity'><button type='submit' class='updateBtn'><span class='fas fa-pen'></span></button></form></td>"+
                                     "<td><a href='#' class='deleteBtn' id='"+result[i]['CidadeID']+"'><span class='fas fa-trash'></span></a></td>"+
                                     "</tr>"
                                     );                        
                                 }
                             }else{
-                                $("#readDistrict").html("<p>Nenhuma cidade encontrada!</p>");
+                                $("#readCity").html("<p>Nenhuma cidade encontrada!</p>");
+                            }
+                        }else if(action == "readModule"){
+                            if(result){
+                                $("#readModule").html("<table id='tableMod'>"+
+                                "<thead><th>Código</th><th>Nome</th><th>Atualizar</th><th>Excluir</th>"+
+                                "<tbody>"+              
+                                "</tbody></table>");
+                                for (var i = 0; i < result.length; i++) {                            
+                                    $('#tableMod').append("<tr>"+
+                                    "<td>"+result[i]['ModuloID']+"</td>"+                            
+                                    "<td>"+result[i]['ModuloNome']+"</td>"+
+                                    "<td><form class='modFormUp' action='forms/updates.php' method='POST'><input type='hidden' name='id' value='"+result[i]['ModuloID']+"'>"+
+                                    "<input type='hidden' name='action' value='updateModule'><button type='submit' class='updateBtn'><span class='fas fa-pen'></span></button></form></td>"+
+                                    "<td><a href='#' class='deleteBtn' id='"+result[i]['ModuloID']+"'><span class='fas fa-trash'></span></a></td>"+
+                                    "</tr>"
+                                    );                        
+                                }
+                            }else{
+                                $("#readModule").html("<p>Nenhum módulo encontrado!</p>");
                             }
                         }
                     break;
-                
-                    case "list":
-                        if(action == "readClient"){
-                            $("#readClient").html("<ul id='listClient'></ul>");
-                            for(var i=0; i< result.length; i++){
-                                $("#listClient").append(
-                                "<li>ID: "+result[i]['ClienteID']+"</li>" +
-                                "<li>Nome: "+result[i]['ClienteNome']+"</li>" +
-                                "<li>CPF: "+result[i]['ClienteCPF']+"</li>" +
-                                "<li>Data de Nasc.: "+result[i]['ClienteDataNasc']+"</li>" +
-                                "<li>Gênero: "+result[i]['ClienteSexo']+"</li>" +
-                                "<li>Bairro: "+result[i]['BairroNome']+"</li>" +
-                                "<li>Cidade: "+result[i]['CidadeNome']+"</li>" +
-                                "<li><a href='#' class='deleteBtn' id='"+result[i]['ClienteID']+"'><span class='fas fa-trash'></span></a></li>" +
-                                "<br>"
-                                );
-                            }
-                        }else if(action == "readDistrict"){
-                            $("#readDistrict").html("<ul id='listDistrict'></ul>");
-                            for(var i=0; i< result.length; i++){
-                                $("#listDistrict").append(
-                                "<li>ID: "+result[i]['BairroID']+"</li>" +
-                                "<li>Nome: "+result[i]['BairroNome']+"</li>" +
-                                "<li>Cidade: "+result[i]['CidadeNome']+"</li>" +
-                                "<li><a href='#' class='deleteBtn' id='"+result[i]['BairroID']+"'><span class='fas fa-trash'></span></a></li>" +
-                                "<br>"
-                                );
-                            }
-                        }else if(action == "readCity"){
-                            $("#readCity").html("<ul id='listCity'></ul>");
-                            for(var i=0; i< result.length; i++){
-                                $("#listCity").append(
-                                "<li>ID: "+result[i]['CidadeID']+"</li>" +
-                                "<li>Nome: "+result[i]['CidadeNome']+"</li>" +
-                                "<li>Cidade: "+result[i]['CidadeUF']+"</li>" +
-                                "<li><a href='#' class='deleteBtn' id='"+result[i]['CidadeID']+"'><span class='fas fa-trash'></span></a></li>" +
-                                "<br>"
-                                );
-                            }
-                        }
-                        break;
-
                 }
             },
             error: function(e){
@@ -124,18 +134,33 @@ $(document).ready(function(){
     
     function deleteGeneric(action, data){
         $.ajax({
-            url: "../GestaoCliente/php/control.php",
+            url: "php/control.php",
             method: "POST",
             data: data + "&action="+action,
             dataType: "json",
             success: function(result){
-                
+                Swal.fire(
+                    'Deletado!',
+                    result['message'],
+                    'success'
+                  )
+                if(result['logout']){
+                    window.location.href = 'php/logout.php';
+                }
             },
             error: function(e){
                 console.log(e.status);
             }
         });
     }
+
+    var btnEmp = $(".btnSearchEmp");
+    btnEmp.click(function(){
+        var dataEmp = $(".employeeForm").serialize();        
+        readGeneric("readEmployee", dataEmp, "table");
+        
+        return false;
+    });
 
     var btnCli = $(".btnSearchCli");
     btnCli.click(function(){
@@ -161,6 +186,37 @@ $(document).ready(function(){
         return false;
     });
 
+    var btnMod = $(".btnSearchMod");
+    btnMod.click(function(){
+        var dataMod = $(".moduleForm").serialize();
+        readGeneric("readModule", dataMod, "table");
+
+        return false;
+    });
+
+
+
+    $('#readEmployee').on('click', '.deleteBtn', function(){
+        var id = $(this).attr('id');
+        Swal.fire({
+            title: 'Alerta!',
+            text: "Você tem certeza que deseja excluir esse registro? Pode acontecer problemas dependendo do registro.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não',
+            confirmButtonText: 'Sim'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deleteGeneric('deleteEmployee', 'id='+id);
+                readGeneric("readEmployee", "employee=", "table");
+            }
+          })
+
+        return false;
+    });
+
     $('#readClient').on('click', '.deleteBtn', function(){  
         var id = $(this).attr('id');
         Swal.fire({
@@ -172,15 +228,10 @@ $(document).ready(function(){
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não',
             confirmButtonText: 'Sim'
-          }).then((result2) => {
-            if (result2.isConfirmed) {
+          }).then((result) => {
+            if (result.isConfirmed) {
                 deleteGeneric('deleteClient', 'id='+id);
                 readGeneric("readClient", "client=", "table");
-                Swal.fire(
-                    'Deletado!',
-                    result['message'],
-                    'success'
-                )
             }
           })
 
@@ -198,15 +249,10 @@ $(document).ready(function(){
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não',
             confirmButtonText: 'Sim'
-          }).then((result2) => {
-            if (result2.isConfirmed) {
+          }).then((result) => {
+            if (result.isConfirmed) {
                 deleteGeneric('deleteDistrict', 'id='+id);
                 readGeneric("readDistrict", "district=", "table");
-                Swal.fire(
-                    'Deletado!',
-                    result['message'],
-                    'success'
-                )
             }
           })        
 
@@ -224,22 +270,38 @@ $(document).ready(function(){
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não',
             confirmButtonText: 'Sim'
-          }).then((result2) => {
-            if (result2.isConfirmed) {
+          }).then((result) => {
+            if (result.isConfirmed) {
                 deleteGeneric('deleteCity', 'id='+id);
                 readGeneric("readCity", "city=", "table");
-                Swal.fire(
-                    'Deletado!',
-                    result['message'],
-                    'success'
-                )
             }
           })        
         return false;
     });
 
-
+    $('#readModule').on('click', '.deleteBtn', function(){
+        var id = $(this).attr('id');
+        Swal.fire({
+            title: 'Alerta!',
+            text: "Você tem certeza que deseja excluir esse registro? Pode acontecer problemas dependendo do registro.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não',
+            confirmButtonText: 'Sim'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                deleteGeneric('deleteModule', 'id='+id);
+                readGeneric("readModule", "city=", "table");
+            }
+          })        
+        return false;
+    });
+    
+    readGeneric("readEmployee", $(".employeeForm").serialize(), "table");
     readGeneric("readClient", $(".clientForm").serialize(), "table");
     readGeneric("readDistrict", $(".districtForm").serialize(), "table");
     readGeneric("readCity", $(".cityForm").serialize(), "table");
+    readGeneric("readModule", $(".moduleForm").serialize(), "table");
 });
