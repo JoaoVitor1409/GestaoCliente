@@ -140,7 +140,7 @@ $(document).ready(function(){
             dataType: "json",
             success: function(result){
                 Swal.fire(
-                    'Delteado!',
+                    'Deletado!',
                     result['message'],
                     'success'
                   )
@@ -153,8 +153,6 @@ $(document).ready(function(){
             }
         });
     }
-
-
 
     var btnEmp = $(".btnSearchEmp");
     btnEmp.click(function(){

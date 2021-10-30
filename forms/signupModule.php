@@ -7,16 +7,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/forms.css">
     <title>Cadastro de Módulos</title>
 </head>
 <body>
-
-    <div class="result"></div>
-
     <form class="moduleForm" action="../php/insertModule.php" method="POST">
-        <label for="name">Nome:</label>
-        <input type="text" name="name" placeholder="Insira o Nome do Módulo" id="name" required>
 
+        <div class="result"></div>
+        
+        <label for="name"><span>Nome:</span>
+        <input type="text" name="name" placeholder="Insira o Nome do Módulo" id="name" required>
+        </label>
         <input type="submit" value="Inserir" class="btnSubmit">
     </form>
 

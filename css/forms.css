@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;  
+    font-family: 'Comfortaa', cursive;  
+}
+
+body{
+    background: #0c1721;
+}
+
+form{
+    margin: 0 auto;
+    width: 50%;
+    color: #fff;
+    padding: 60px 5px;
+    padding-left: 6 0px;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    box-shadow: 7px 5px 5px #000;
+    margin-bottom: 100px;
+}
+label{
+    display: block;
+    margin-bottom: 15px;
+}
+label input{
+    width: 50%;
+    border-radius: 7px;
+    border: none;
+    padding: 15px;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+label input[type=date]{
+    width: 45%;
+}
+
+
+#gender{
+    display: inline;  
+}
+
+.radios{
+    margin: 0 auto;
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 20px;
+}
+
+.radios input{
+    display: none;
+}
+
+.radios label{
+    background-color: #34638a;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 150px;
+    border-radius: 10px;
+}
+
+.radios label:hover{
+    background-color: #264865;
+    transition: 0.5s;
+}
+
+label input[type=file]{
+   display: none;
+}
+
+label[for=photo]{
+    width: 30%;
+    margin: 0 auto;
+    background-color: #34638a;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label[for=photo]:hover{
+    background-color: #264865;
+    transition: 0.5s;
+}
+
+select{
+    font-size: 1.2em;
+    margin: 20px 0;
+}
+select option{
+    font-size: 0.8em;
+}
+
+#modules{
+    display: flex;
+    justify-content: center;
+}
+
+#modules select{
+    margin-left: 10px;
+}
+
+.btns{
+    display: inline-block;
+}   
+
+.btns span{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+.btns .addModule, .btns .remModule{
+    font-size: 2em;
+    cursor: pointer;
+    
+}
+
+
+
+
+
+label span{
+    font-size: 1.4em;
+}
+
+label .fas{
+    font-size: 2em;
+    margin-right: 4px;
+}
+
+.btnSubmit, .submit{
+    background-color: #34638a;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    width: 75%;
+    cursor: pointer;
+    border-radius: 7px;
+    font-size: 1.25em;
+    transition: 0.5s;
+}
+
+.btnSubmit:hover, .submit:hover{
+    background-color: #264865;
+    transition: 0.5s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.result{
+    width: 70%;
+    margin: 3px auto;
+    border-radius: 7px;
+    padding: 3px;
+    display: none;
+    transition: 4s;
+}
+
+.result .error{
+    color: #f00;
+    font-size: 1.8em;
+}
+
+.success{
+    color: #0a0;
+    font-size: 1.8em;
+}
+
+
+
+.loading {
+    width: 489px;
+    background: #900;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.loading .progress {
+    padding: 5px;
+    background: #060;
+    width: 0%;
+    color: #FFF;
+    text-align: center;
+    max-width: 479px;
+    border-radius: 10px;
+}

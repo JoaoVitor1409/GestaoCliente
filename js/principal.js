@@ -2,13 +2,13 @@ $(document).ready(function(){
     var result = $(".result");
 
     function success(message) {
-        result.html("<p class='success'>"+ message + "</p>").fadeIn("fast").delay(2000).hide(1000);
+        result.html("<p class='success'>"+ message + "</p>").fadeIn("fast").delay(2000);
     }
     function errorSend() {
-        result.html("<p class='error'><strong>Erro: Por favor, entre em contanto com o suporte</strong></p>").fadeIn("fast").delay(2000).hide(1000);
+        result.html("<p class='error'><strong>Erro: Por favor, entre em contanto com o suporte</strong></p>").fadeIn("fast").delay(2000);
     }
     function errorData(message) {
-        result.html("<p class='error'>"+ message + "</p>").fadeIn("fast").delay(2000).hide(1000);
+        result.html("<p class='error'>"+ message + "</p>").fadeIn("fast").delay(2000);
     }
 
     function signupGeneric(action, data){
@@ -65,6 +65,60 @@ $(document).ready(function(){
         });
     }
 
+
+
+    $("input[type=text],input[type=password]").click(function(){
+        result.css("display", "none");
+    });
+    var m=0;
+    var f=0;
+    var o=0;
+    $("#male").css("background-color", "#FFF");
+    $("#male").css("color", "#000");
+    $("#male").click(function(){        
+        if(m==0){
+            $("#male").css("background-color", "#FFF");
+            $("#male").css("color", "#000");
+            $("#female").css("background-color", "#34638a");
+            $("#female").css("color", "#FFF");
+            $("#other").css("background-color", "#34638a");
+            $("#other").css("color", "#FFF");
+            f=0;
+            o=0;
+            m++;
+        }
+    })
+
+    $("#female").click(function(){
+        if(f==0){
+            $("#female").css("background-color", "#FFF");
+            $("#female").css("color", "#000");
+            $("#male").css("background-color", "#34638a");
+            $("#male").css("color", "#FFF");
+            $("#other").css("background-color", "#34638a");
+            $("#other").css("color", "#FFF");
+            m=0;
+            o=0;
+            f++;
+        }
+    })
+
+    $("#other").click(function(){
+        if(o==0){
+            $("#other").css("background-color", "#FFF");
+            $("#other").css("color", "#000");
+            $("#female").css("background-color", "#34638a");
+            $("#female").css("color", "#FFF");
+            $("#male").css("background-color", "#34638a");
+            $("#male").css("color", "#FFF");
+            m=0;
+            f=0;
+            o++;
+        }
+    })
+
+
+
     var btn = $(".btnSubmit");
     btn.click(function(){
         var dataLogin = $(".loginForm").serialize();
@@ -120,14 +174,19 @@ $(document).ready(function(){
     var cliForm = $("form[name='clientForm']");
     cliForm.submit(function() {
         signupGenericForm(cliForm, "insertClient");
+        $.scrollTo("body", 500);
         return false;
     });
 
     var empForm = $("form[name='employeeForm']");
     empForm.submit(function(){
         signupGenericForm(empForm, "insertEmployee");
+        $.scrollTo("body", 500);
         return false;
     });
+
+
+
 
     var addModule = $(".addModule");
     var limit = -2;
@@ -172,8 +231,12 @@ $(document).ready(function(){
     remModule.click(function(){
         j--;
         limit++;
-        console.log(".module"+j);
         $(".module"+j).empty();
     });
+
+
+
+    var cpf = $("#cpf");
+    cpf.mask('000.000.000-00');
 
 });

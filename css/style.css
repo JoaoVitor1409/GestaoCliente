@@ -1,13 +1,139 @@
-.loading {
-    width: 489px;
-    background: #900;
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
 }
 
-.loading .progress {
-    padding: 5px;
-    background: #060;
-    width: 0%;
+body{
+    background-color: #0c1721;
+    color: #fff;
+    font-family: 'Comfortaa', cursive;
+    
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.header img{
+    width: 100px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    margin-right: 20px;
+}
+
+.header h1{
+    font-size: 1.8em;
+}
+
+.header a{
+    color: #F00;
+    margin-left: 20px;
+}
+
+
+#container h1{
+   font-size: 1.5em;
+   margin-bottom: 15px;
+}
+
+form{
+    display: flex;
+    align-items: center;
+}
+
+form input[type=text]{
+    background-color: #fff;
+    border: none;
+    padding: 15px;
+    width: 15%;
+    font-size: 1.2em;
+}
+
+form .fa-user, form .fa-search{
+    background-color: #Fff;
+    color: #757575;
+    padding: 16.5px;
+    font-size: 1.2em;
+}
+
+form .fa-user{
+    border-radius: 13px 0 0 13px;
+}
+
+form button {
+    border: none;
+    border-radius: 0 13px 13px 0;
+    cursor: pointer;
+}
+
+form button .fa-search{
+    border-radius: 0 13px 13px 0;
+}
+
+#container .btn{
     color: #FFF;
+    font-size: 1.2em;
+    background-color: #34638a;
+    padding: 15px;
+    width: 200px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 60px 0;
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+#container .btn:hover{
+    background-color: #264865;
+    transition: 0.5s;
+}
+
+#container table{
     text-align: center;
-    max-width: 479px;
+    margin-top: 20px;
+    padding: 7px;
+    border-collapse: collapse;   
+    font-size: 1.2em;
+}
+
+#container table thead{
+    background-color: #11212f;
+}
+
+#container table th{
+    font-weight: normal;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+#container table td{
+    font-weight: normal;
+    padding: 25px;
+    padding-bottom: 15px;
+    border-top: 0.1px solid #9b8686;
+}
+
+#container table td form button{
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.3em;
+}
+
+#container table td a{
+    color: #F00;
+    font-size: 1.3em;
+    text-decoration: none;
+}
+
+p{
+    font-size: 1.3em;
+    padding: 15px;
 }

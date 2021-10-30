@@ -11,24 +11,28 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="../css/forms.css">
                 <title>Atualização de Funcionários</title>
             </head>
             <body>
-                <div class="result"></div>
-
                 <form class="employeeFormUp" action="../php/updateEmployee.php" method="POST">
+                    <div class="result"></div>
                     <input type="hidden" name="id" value="<?=$id?>">  
 
-                    <label for="name">Nome:</label>
+                    <label for="name"><span>Nome:</span>
                     <input type="text" name="name" placeholder="Insira o Nome" id="name">
+                    </label>
 
-                    <label for="username">Usuário:</label>
+                    <label for="username"><span>Usuário:</span>
                     <input type="text" name="username" placeholder="Insira o Nome" id="username" >
+                    </label>
 
-                    <label for="ps">Senha:</label>
+                    <label for="ps"><span>Senha:</span>
                     <input type="password" name="ps" placeholder="Insira a sua senha" id="ps" >
+                    </label>
 
-                    <label for="state">Estado:</label>
+                    <label for="state"><span>Estado:</span>
                     <select name="state">
                         <option value="NA">Não alterar</option>
                         <option value="AC">AC</option>
@@ -59,12 +63,15 @@
                         <option value="SE">SE</option>
                         <option value="TO">TO</option>
                     </select>   
+                    </label>
 
-                    <label for="city">Cidade:</label>
+                    <label for="city"><span>Cidade:</span>
                     <input type="text" name="city" placeholder="Insira a Cidade" id="city">
+                    </label>
 
-                    <label for="district">Bairro:</label>
+                    <label for="district"><span>Bairro:</span>
                     <input type="text" name="district" placeholder="Insira o Bairro" id="district">        
+                    </label>
 
                     <input type="submit" value="Atualizar" class="btnSubmit">
                 </form>
@@ -81,19 +88,20 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="../css/forms.css">
                 <title>Atualização de Clientes</title>
             </head>
             <body>
-
-                <div class="result"></div>
-
                 <form class="clientFormUp" action="../php/updateClient.php" method="POST">
+                    <div class="result"></div>
                     <input type="hidden" name="id" value="<?=$id?>"> 
 
-                    <label for="name">Nome:</label>
+                    <label for="name"><span>Nome:</span>
                     <input type="text" name="name" placeholder="Insira o Nome" id="name">
+                    </label>
 
-                    <label for="state">Estado:</label>
+                    <label for="state"><span>Estado:</span>
                     <select name="state">
                         <option value="NA">Não alterar</option>
                         <option value="AC">AC</option>
@@ -124,12 +132,15 @@
                         <option value="SE">SE</option>
                         <option value="TO">TO</option>
                     </select>   
+                    </label>
 
-                    <label for="city">Cidade:</label>
+                    <label for="city"><span>Cidade:</span>
                     <input type="text" name="city" placeholder="Insira a Cidade" id="city">
+                    </label>
 
-                    <label for="district">Bairro:</label>
+                    <label for="district"><span>Bairro:</span>
                     <input type="text" name="district" placeholder="Insira o Bairro" id="district">        
+                    </label>
 
                     <input type="submit" value="Atualizar" class="btnSubmit">
                 </form>
@@ -146,19 +157,20 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="../css/forms.css">
                 <title>Atualização de Bairros</title>
             </head>
             <body>
-
-                <div class="result"></div>
-
                 <form class="districtFormUp" action="../php/updateDistrict.php" method="POST">
+                    <div class="result"></div>
                     <input type="hidden" name="id" value="<?=$id?>"> 
 
-                    <label for="name">Nome:</label>
+                    <label for="name"><span>Nome: </span>
                     <input type="text" name="name" placeholder="Insira o Nome" id="name">
+                    </label>
 
-                    <label for="state">Estado:</label>
+                    <label for="state"><span>Estado:</span>
                     <select name="state">
                         <option value="NA">Não alterar</option>
                         <option value="AC">AC</option>
@@ -189,9 +201,11 @@
                         <option value="SE">SE</option>
                         <option value="TO">TO</option>
                     </select>       
+                    </label>
 
-                    <label for="city">Cidade:</label>
+                    <label for="city"><span>Cidade:</span>
                     <input type="text" name="city" placeholder="Insira a Cidade" id="city">        
+                    </label>
 
                     <input type="submit" value="Atualizar" class="btnSubmit">
                 </form>
@@ -208,19 +222,20 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="../css/forms.css">
                 <title>Atualização de Cidades</title>
             </head>
             <body>
-
-                <div class="result"></div>
-
                 <form class="cityFormUp" action="../php/updateCity.php" method="POST">
+                    <div class="result"></div>
                     <input type="hidden" name="id" value="<?=$id?>">   
 
-                    <label for="name">Nome:</label>
+                    <label for="name"><span>Nome: </span>
                     <input type="text" name="name" placeholder="Insira o Nome" id="name">
+                    </label>
 
-                    <label for="state">Estado:</label>
+                    <label for="state"><span>Estado: </span>
                     <select name="state">
                         <option value="NA">Não alterar</option>
                         <option value="AC">AC</option>
@@ -250,7 +265,8 @@
                         <option value="SP">SP</option>
                         <option value="SE">SE</option>
                         <option value="TO">TO</option>
-                    </select>           
+                    </select>                               
+                    </label>
 
                     <input type="submit" value="Atualizar" class="btnSubmit">
                 </form>
@@ -267,18 +283,18 @@
                 <meta charset="UTF-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Comfortaa:wght@500&display=swap" rel="stylesheet">
+                <link rel="stylesheet" href="../css/forms.css">
                 <title>Atualização de Módulos</title>
             </head>
             <body>
-
-                <div class="result"></div>
-
                 <form class="moduleFormUp" action="../php/updateModule.php" method="POST">
+                    <div class="result"></div>
                     <input type="hidden" name="id" value="<?=$id?>">   
 
-                    <label for="name">Nome:</label>
+                    <label for="name"><span>Nome:</span>
                     <input type="text" name="name" placeholder="Insira o Nome" id="name">          
-
+                    </label>
                     <input type="submit" value="Atualizar" class="btnSubmit">
                 </form>
 

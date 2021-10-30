@@ -165,6 +165,11 @@
                 $return["code"] = "0";
                 $return["message"] = 'Não poderá conter nenhum módulo, já que foi selecionado a opção "Nenhum Módulo"';
             }else{
+                $city = mb_convert_case($city, MB_CASE_LOWER);
+                $district = mb_convert_case($district, MB_CASE_LOWER);
+                $city = ucfirst($city);
+                $district = ucfirst($district);
+
                 $photoName = $_FILES['photo']['name'];
 
                 $file = '../photos/';
@@ -243,6 +248,12 @@
                     $districtID = $resultDistrict[0]['BairroID'];
                 }
 
+                if(mb_strlen($cpf) != 14){
+                    $return["code"] = "0";
+                    $return["message"] = 'CPF Inválido';
+                    echo json_encode($return);
+                    return;
+                }
                 $dataEmp = [
                     "FuncionarioNome" => $name,
                     "FuncionarioUsuario" => $username,
@@ -360,6 +371,11 @@
                 $return["message"] = "Bairro não pode ser vazio";
             }else{
                 
+                $city = mb_convert_case($city, MB_CASE_LOWER);
+                $district = mb_convert_case($district, MB_CASE_LOWER);
+                $city = ucfirst($city);
+                $district = ucfirst($district);
+
                 $photoName = $_FILES['photo']['name'];
 
                 $condition = [
@@ -416,6 +432,13 @@
                     $districtID = $resultDistrict[0]['BairroID'];
                 }
 
+                if(mb_strlen($cpf) != 14){
+                    $return["code"] = "0";
+                    $return["message"] = 'CPF Inválido';
+                    echo json_encode($return);
+                    return;
+                }
+
                 $data = [
                     "ClienteNome" => $name,
                     "ClienteCPF" => $cpf,
@@ -445,6 +468,11 @@
                 $return["code"] = "0";
                 $return["message"] = "Cidade não pode ser vazio";
             }else{
+                $city = mb_convert_case($city, MB_CASE_LOWER);
+                $name = mb_convert_case($name, MB_CASE_LOWER);
+                $city = ucfirst($city);
+                $name = ucfirst($name);
+            
                 $condition = [
                     "CidadeNome" => $city,
                     "CidadeUF" => $state
@@ -485,7 +513,7 @@
                 $return["message"] = "Estado não pode ser vazio";
             }else{
                 $data = [
-                    "CidadeNome" => $name,
+                    "CidadeNome" => ucfirst(mb_convert_case($name, MB_CASE_LOWER)),
                     "CidadeUF" => $state
                 ];
                 if(Insert("Cidade",$data)){
@@ -539,6 +567,10 @@
                     $datas["FuncionarioSenha"] = $ps;
                 }
                 if($state != "NA"){
+                    $city = mb_convert_case($city, MB_CASE_LOWER);
+                    $district = mb_convert_case($district, MB_CASE_LOWER);
+                    $city = ucfirst($city);
+                    $district = ucfirst($district);
                     if($city != ""){
                         $condition = [
                             "CidadeNome" => $city,
@@ -636,6 +668,10 @@
                     $datas["ClienteNome"] = $name;
                 }
                 if($state != "NA"){
+                    $city = mb_convert_case($city, MB_CASE_LOWER);
+                    $district = mb_convert_case($district, MB_CASE_LOWER);
+                    $city = ucfirst($city);
+                    $district = ucfirst($district);
                     if($city != ""){
                         $condition = [
                             "CidadeNome" => $city,
@@ -732,6 +768,10 @@
                     $datas["BairroNome"] = $name;
                 }
                 if($state != "NA"){
+                    $city = mb_convert_case($city, MB_CASE_LOWER);
+                    $name = mb_convert_case($name, MB_CASE_LOWER);
+                    $city = ucfirst($city);
+                    $name = ucfirst($name);
                     $condition = [
                         "CidadeNome" => $city,
                         "CidadeUF" => $state
@@ -785,7 +825,7 @@
                 $datas = [];
 
                 if($name != ""){
-                    $datas["CidadeNome"] = $name;
+                    $datas["CidadeNome"] = ucfirst(mb_convert_case($name, MB_CASE_LOWER));
                 }
                 if($state != "NA"){
                     $datas["CidadeUF"] = $state;
@@ -927,23 +967,24 @@
                 if($result){
                     $return['code'] = 1;
                     $return['message'] = "Bem vindo!";
+
                     $_SESSION['login'] = true;
                     $_SESSION['user'] = [
                         'username' => $username, 
                         'id' => $result[0]['FuncionarioID'],
                         'photo' => $result[0]['FuncionarioFoto'],
                     ];
+
+                    $_SESSION['user']['modules']['signup'] = false;
+                    $_SESSION['user']['modules']['read'] = false;
+
                     if($modules){
                         foreach ($modules as $value) {  
                             $condition = [
                                 "ModuloID" => $value['ModuloID']
                             ];
                             $modulesNames[] = Read("Modulo", "ModuloNome", $condition);
-                        }
-
-                        $_SESSION['user']['modules']['signup'] = false;
-                        $_SESSION['user']['modules']['read'] = false;
-
+                        }                 
                         if(isset($modulesNames[0][0]['ModuloNome'])){
                              if($modulesNames[0][0]['ModuloNome'] == 'Cadastrar'){
                                 $_SESSION['user']['modules']['signup'] = true;
@@ -955,7 +996,12 @@
                             }else if($modulesNames[0][0]['ModuloNome'] == 'Listar'){
                                 $_SESSION['user']['modules']['read'] = true;
                             }
-                        }                        
+                        }
+
+                    }
+                    if(!$_SESSION['user']['modules']['signup'] && !$_SESSION['user']['modules']['read']){
+                        $return['code'] = 0;
+                        $return['message'] = "Você não tem permissão para entrar no sistema, por favor contate o suporte!";
                     }
                 }else{
                     $return['code'] = 0;
